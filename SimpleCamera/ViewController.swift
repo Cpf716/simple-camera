@@ -21,7 +21,9 @@ class ViewController: UIViewController, AVCapturePhotoCaptureDelegate {
     func handleTouch(_ sender: Any) {
         let photoSettings = AVCapturePhotoSettings(format: nil)
         photoSettings.isAutoStillImageStabilizationEnabled = true
-        photoSettings.flashMode = .auto
+        if photoOutput.supportedFlashModes.contains(AVCaptureDevice.FlashMode.auto) {
+            photoSettings.flashMode = .auto
+        }
         photoOutput.capturePhoto(with: photoSettings, delegate: self)
     }
     
